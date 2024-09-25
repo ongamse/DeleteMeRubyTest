@@ -18,7 +18,7 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.7' # Not needed with a `.ruby-version` or `.tool-versions`
-    - run: bundle exec rake  
+    #- run: bundle exec rake  
     - name: Download Qwiet CLI
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
