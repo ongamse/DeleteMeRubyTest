@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7' # Not needed with a `.ruby-version` or `.tool-versions`
+    - run: bundle exec rake  
     - name: Download Qwiet CLI
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
@@ -24,7 +28,7 @@ jobs:
       id: extract_branch
     - name: NextGen Static Analysis
       run: |
-        ${GITHUB_WORKSPACE}/sl analyze --app DeleteMeRuby --ruby .
+        ${GITHUB_WORKSPACE}/sl analyze --verbose --app DeleteMeRuby --ruby .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_API_HOST: www.shiftleft.io
